@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fleet Catalog & CRUD Management | Mithil Rental Servies Bharat</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏍️</text></svg>">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo-group">
+        <div class="logo-icon">🏍️</div>
+        <div class="logo-text">
+          <span class="logo-title">Mithil Rental Servies</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="bikes.html" class="nav-link active">Our Fleet (CRUD)</a></li>
+        <li><a href="bookings.html" class="nav-link">My Bookings</a></li>
+        <li><a href="about.html" class="nav-link">About & Hubs</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div id="db-status-pill" class="db-pill">
+          <span class="dot"></span> Connecting...
+        </div>
+        <button id="btn-open-add-modal" class="btn btn-primary btn-sm">+ Add New Bike (Create)</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- FLEET HERO HEADER WITH IMAGE -->
+  <section class="section" style="padding-bottom: 1.5rem; padding-top: 3rem;">
+    <div style="position: relative; border-radius: var(--radius-lg); overflow: hidden; height: 260px; border: 1px solid var(--border-glass); margin-bottom: 2rem;">
+      <img src="images/goa_beach.jpg" alt="Motorcycles in Goa Beach India" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='/images/hero_ladakh.jpg'">
+      <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(9,13,22,0.3) 0%, rgba(9,13,22,0.92) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem;">
+        <span style="color: var(--primary-saffron); font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.05em;">Fleet Operations & CRUD Management System</span>
+        <h1 style="font-size: 2.5rem; font-weight: 800; margin-top: 0.2rem;">Bharat Motorcycle Inventory</h1>
+      </div>
+    </div>
+
+    <!-- CRUD OPERATIONS QUICK GUIDE BANNER -->
+    <div style="background: rgba(24, 34, 52, 0.7); border: 1px solid var(--border-accent); border-radius: var(--radius-md); padding: 1rem 1.5rem; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span style="font-size: 1.5rem;">⚙️</span>
+        <div>
+          <div style="font-weight: 700; color: #fff;">Full CRUD Operations Enabled:</div>
+          <div style="font-size: 0.85rem; color: var(--text-secondary);">
+            <strong style="color:var(--primary-saffron)">C</strong>reate (Add Bike) • 
+            <strong style="color:#60a5fa">R</strong>ead (View & Filter) • 
+            <strong style="color:var(--accent-green)">U</strong>pdate (Edit Specs/Price/Status) • 
+            <strong style="color:var(--accent-red)">D</strong>elete (Remove from Database)
+          </div>
+        </div>
+      </div>
+      <div>
+        <button id="btn-add-bike-quick" class="btn btn-primary btn-sm">+ Add New Bike (Create)</button>
+      </div>
+    </div>
+
+    <!-- FILTER & SEARCH CONTROLS (CRUD: READ) -->
+    <div class="filter-bar" style="margin: 0 0 2.5rem 0;">
+      <div class="form-group">
+        <label class="form-label">Search Bike Name or Brand</label>
+        <input type="text" id="filter-search" class="form-control" placeholder="Search Classic 350, Himalayan, Activa...">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Location Hub</label>
+        <select id="filter-location" class="form-control">
+          <option value="All">All Cities</option>
+          <option value="Goa">Goa Hub</option>
+          <option value="Bengaluru">Bengaluru Hub</option>
+          <option value="Manali">Manali Hub</option>
+          <option value="Mumbai">Mumbai Hub</option>
+          <option value="Delhi">Delhi NCR Hub</option>
+          <option value="Jaipur">Jaipur Hub</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Category</label>
+        <select id="filter-category" class="form-control">
+          <option value="All">All Categories</option>
+          <option value="Cruiser">Cruiser</option>
+          <option value="Scooty">Scooty / Scooter</option>
+          <option value="Sport">Sport / Naked</option>
+          <option value="Adventure">Adventure</option>
+          <option value="Electric">Electric EV</option>
+        </select>
+      </div>
+      <button class="btn btn-secondary" id="btn-reset-filters" style="height: 48px;">
+        Reset Filters
+      </button>
+    </div>
+
+    <!-- ACTIVE BIKES STATS BAR -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+      <div style="font-size: 1.15rem; font-weight: 700;">
+        Showing <span id="bikes-count" style="color: var(--primary-saffron);">0</span> Bikes in Fleet
+      </div>
+      <div style="color: var(--text-secondary); font-size: 0.9rem;">
+        Click <strong>"✏️ Update"</strong> to edit details or <strong>"🗑️ Delete"</strong> to remove
+      </div>
+    </div>
+
+    <!-- DYNAMIC BIKES GRID (CARDS VIEW) -->
+    <div class="bikes-grid" id="bikes-container">
+      <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-secondary);">
+        Fetching fleet from MySQL database...
+      </div>
+    </div>
+
+    <!-- DEDICATED FLEET CRUD MANAGEMENT TABLE (TABLE VIEW) -->
+    <div style="margin-top: 4rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h2 style="font-size: 1.6rem; font-weight: 800;">Fleet CRUD Operations Table</h2>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">Direct row-by-row Update and Delete actions for examiners and administrators</p>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Bike Name & Brand</th>
+              <th>Category & Engine</th>
+              <th>Price / Day</th>
+              <th>Location Hub</th>
+              <th>Status</th>
+              <th style="text-align: right;">CRUD Actions (Update / Delete)</th>
+            </tr>
+          </thead>
+          <tbody id="bikes-table-body">
+            <tr>
+              <td colspan="7" style="text-align: center; padding: 2rem; color: var(--text-secondary);">
+                Loading CRUD table records from MySQL...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL: ADD / EDIT BIKE (CRUD: CREATE & UPDATE) -->
+  <div class="modal-overlay" id="bike-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-heading">Add New Bike to Fleet</h3>
+        <button class="modal-close" id="btn-close-modal">&times;</button>
+      </div>
+      <form id="bike-form">
+        <input type="hidden" id="bike-id">
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+          <div class="form-group">
+            <label class="form-label">Bike Model Name *</label>
+            <input type="text" id="bike-name" class="form-control" placeholder="e.g. Royal Enfield Hunter 350" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Brand *</label>
+            <input type="text" id="bike-brand" class="form-control" placeholder="e.g. Royal Enfield, Honda" required>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+          <div class="form-group">
+            <label class="form-label">Category *</label>
+            <select id="bike-category" class="form-control" required>
+              <option value="Cruiser">Cruiser</option>
+              <option value="Scooty">Scooty / Scooter</option>
+              <option value="Sport">Sport</option>
+              <option value="Adventure">Adventure</option>
+              <option value="Electric">Electric EV</option>
+              <option value="Commuter">Commuter</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Engine CC / Battery *</label>
+            <input type="text" id="bike-engine" class="form-control" placeholder="e.g. 349 cc or 3.7 kWh" required>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+          <div class="form-group">
+            <label class="form-label">Price Per Day (₹) *</label>
+            <input type="number" id="bike-price" class="form-control" placeholder="e.g. 999" min="100" step="10" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Fuel Type</label>
+            <select id="bike-fuel" class="form-control">
+              <option value="Petrol">Petrol</option>
+              <option value="Electric">Electric</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+          <div class="form-group">
+            <label class="form-label">Pickup City / Hub *</label>
+            <input type="text" id="bike-location" class="form-control" placeholder="e.g. Goa - Calangute Hub" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Status</label>
+            <select id="bike-status" class="form-control">
+              <option value="Available">Available</option>
+              <option value="Rented">Rented</option>
+              <option value="Maintenance">Maintenance</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label class="form-label">Image URL</label>
+          <input type="text" id="bike-image" class="form-control" placeholder="Local path (e.g. images/hero_ladakh.jpg) or Web URL">
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+          <button type="button" class="btn btn-secondary" id="btn-cancel-modal">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btn-submit-modal">Save Bike to Database</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-about">
+        <div class="logo-group">
+          <div class="logo-icon">🏍️</div>
+          <div class="logo-text">
+            <span class="logo-title">Mithil Rental Servies</span>
+            <span class="logo-sub">यात्री व्हील्स</span>
+          </div>
+        </div>
+        <p>Bharat's trusted two-wheeler rental platform with real-time MySQL database integration and complete CRUD operations.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="bikes.html">Fleet Management</a></li>
+          <li><a href="bookings.html">Rental Bookings</a></li>
+          <li><a href="about.html">Indian Hubs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Rentals</h4>
+        <ul>
+          <li>Royal Enfield Bullet 350</li>
+          <li>Honda Activa 6G</li>
+          <li>Ather 450X EV</li>
+          <li>RE Himalayan 450</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Verified CRUD</h4>
+        <ul>
+          <li><strong>Create:</strong> + Add Bike</li>
+          <li><strong>Read:</strong> Filter & Search</li>
+          <li><strong>Update:</strong> ✏️ Edit Specs/Price</li>
+          <li><strong>Delete:</strong> 🗑️ Remove Bike</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Mithil Rental Servies. Built for Indian roads 🇮🇳</span>
+      <span>Port: <strong>http://localhost:3000</strong></span>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/bikes.js"></script>
+</body>
+</html>

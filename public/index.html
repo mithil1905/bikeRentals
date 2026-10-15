@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YatriWheels | यात्री व्हील्स - Bharat's Premier Bike Rental Network</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏍️</text></svg>">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo-group">
+        <div class="logo-icon">🏍️</div>
+        <div class="logo-text">
+          <span class="logo-title">Mithil Rental Servies</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="bikes.html" class="nav-link">Our Fleet (CRUD)</a></li>
+        <li><a href="bookings.html" class="nav-link">My Bookings</a></li>
+        <li><a href="about.html" class="nav-link">About & Hubs</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div id="db-status-pill" class="db-pill">
+          <span class="dot"></span> Connecting...
+        </div>
+        <a href="bikes.html" class="btn btn-primary btn-sm">+ Add Bike</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-tag">🇮🇳 Discover Bharat On Two Wheels</div>
+        <h1 class="hero-title">Ride Free Across <span>Himalayas to Coastal Goa</span></h1>
+        <p class="hero-description">
+          Experience India's most loved two-wheelers. From legendary <strong>Royal Enfield Bullets</strong> for mountain expeditions to nimble <strong>Honda Activas</strong> for city commutes. Instant Aadhaar verification, zero hidden charges, and two free ISI-certified helmets.
+        </p>
+        <div class="hero-buttons">
+          <a href="bikes.html" class="btn btn-primary">Browse All Bikes</a>
+          <a href="bookings.html" class="btn btn-secondary">Book Rental Instantly</a>
+        </div>
+      </div>
+      <div class="hero-image-wrap">
+        <img src="images/hero_ladakh.jpg" alt="Royal Enfield in Ladakh India" id="hero-img">
+        <div class="hero-badge">
+          <span class="hero-badge-icon">🏔️</span>
+          <div class="hero-badge-text">
+            <h4>Leh-Ladakh & Goa Ready</h4>
+            <p>100% Insured & Fully Serviced Fleet</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK SEARCH & FILTER STRIP -->
+  <div class="filter-bar">
+    <div class="form-group">
+      <label class="form-label">Search Bike Model or City</label>
+      <input type="text" id="quick-search" class="form-control" placeholder="e.g. Royal Enfield, Activa, Goa, Manali...">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Pickup City</label>
+      <select id="quick-location" class="form-control">
+        <option value="All">All Indian Hubs</option>
+        <option value="Goa">Goa</option>
+        <option value="Bengaluru">Bengaluru</option>
+        <option value="Manali">Manali</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Jaipur">Jaipur</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Category</label>
+      <select id="quick-category" class="form-control">
+        <option value="All">All Categories</option>
+        <option value="Cruiser">Cruisers (Royal Enfield)</option>
+        <option value="Scooty">Scooters (Activa/Jupiter)</option>
+        <option value="Sport">Sports & Naked (Pulsar/KTM)</option>
+        <option value="Adventure">Adventure (Himalayan)</option>
+        <option value="Electric">Electric EV (Ather)</option>
+      </select>
+    </div>
+    <button class="btn btn-primary" id="btn-quick-search" style="height: 48px;">
+      🔍 Find Ride
+    </button>
+  </div>
+
+  <!-- LIVE STATS STRIP -->
+  <section class="stats-strip">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <h3 id="stat-total-bikes">8+</h3>
+        <p>Available Fleet in Hubs</p>
+      </div>
+      <div class="stat-item">
+        <h3 id="stat-active-rentals">120+</h3>
+        <p>Happy Yatri Trips Today</p>
+      </div>
+      <div class="stat-item">
+        <h3>₹380</h3>
+        <p>Daily Rates Starting From</p>
+      </div>
+      <div class="stat-item">
+        <h3>6 Cities</h3>
+        <p>Across Indian Circuits</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED BIKES SECTION -->
+  <section class="section">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Popular Indian Rides</h2>
+        <p class="section-subtitle">Handpicked bikes tailored for Indian roads, traffic, and high-altitude climbs</p>
+      </div>
+      <a href="bikes.html" class="btn btn-secondary btn-sm">View Full Fleet & CRUD &rarr;</a>
+    </div>
+
+    <div class="bikes-grid" id="featured-bikes-grid">
+      <!-- Dynamic Bike Cards Rendered via JS -->
+      <div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: var(--text-secondary);">
+        Loading YatriWheels fleet...
+      </div>
+    </div>
+  </section>
+
+  <!-- INDIAN RENTAL CULTURE & TRUST SECTION -->
+  <section class="section" style="padding-top: 1rem;">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Why Riders Trust YatriWheels</h2>
+        <p class="section-subtitle">Tailored for the true Indian touring ethos and comfort</p>
+      </div>
+    </div>
+
+    <div class="culture-grid">
+      <div class="culture-card">
+        <div class="culture-icon">🪪</div>
+        <h3>Paperless DigiLocker & Aadhaar</h3>
+        <p>No tedious physical paperwork or holding original passports. Fast 60-second digital KYC with Aadhaar or Indian Driving License.</p>
+      </div>
+      <div class="culture-card">
+        <div class="culture-icon">🪖</div>
+        <h3>2 Free ISI-Certified Helmets</h3>
+        <p>Safety is paramoount on Indian highways. Every bike booking comes bundled with sanitized, high-grade ISI approved helmets for rider and pillion.</p>
+      </div>
+      <div class="culture-card">
+        <div class="culture-icon">🛠️</div>
+        <h3>24x7 Roadside & RTO Assist</h3>
+        <p>Whether navigating Rohtang Pass in Himachal or beach trails in North Goa, our authorized local mechanic network is just a toll-free call away.</p>
+      </div>
+      <div class="culture-card">
+        <div class="culture-icon">⚡</div>
+        <h3>Clean Green EV Commutes</h3>
+        <p>Experience smart Indian mobility with smart Ather 450X scooters equipped with fast touchscreen navigation across Bengaluru hubs.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-about">
+        <div class="logo-group">
+          <div class="logo-icon">🏍️</div>
+          <div class="logo-text">
+            <span class="logo-title">YatriWheels</span>
+            <span class="logo-sub">यात्री व्हील्स</span>
+          </div>
+        </div>
+        <p>Bharat's trusted two-wheeler rental platform. Designed for college students, city commuters, and adventure travelers.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="bikes.html">Fleet Management</a></li>
+          <li><a href="bookings.html">Rental Bookings</a></li>
+          <li><a href="about.html">Indian Hubs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Top Indian Circuits</h4>
+        <ul>
+          <li><a href="bikes.html?location=Goa">Goa Coastal Trail</a></li>
+          <li><a href="bikes.html?location=Manali">Leh-Manali Circuit</a></li>
+          <li><a href="bikes.html?location=Bengaluru">Nandi Hills Dawn Ride</a></li>
+          <li><a href="bikes.html?location=Jaipur">Rajasthan Heritage Loop</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Tech Stack</h4>
+        <ul>
+          <li>HTML5 & Vanilla CSS</li>
+          <li>JavaScript (ES6+)</li>
+          <li>Express.js (localhost:3000)</li>
+          <li>MySQL Workbench & mysql2</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 YatriWheels (यात्री व्हील्स). Crafted with pride in India 🇮🇳</span>
+      <span>Running on: <strong>http://localhost:3000</strong></span>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

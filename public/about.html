@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About & Indian Hubs | Mithil Rental Servies </title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏍️</text></svg>">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo-group">
+        <div class="logo-icon">🏍️</div>
+        <div class="logo-text">
+          <span class="logo-title">Mithil Rental Servies</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="bikes.html" class="nav-link">Our Fleet (CRUD)</a></li>
+        <li><a href="bookings.html" class="nav-link">My Bookings</a></li>
+        <li><a href="about.html" class="nav-link active">About & Hubs</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div id="db-status-pill" class="db-pill">
+          <span class="dot"></span> Connecting...
+        </div>
+        <a href="bookings.html" class="btn btn-primary btn-sm">Rent Now</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION WITH MUNNAR TOUR IMAGE -->
+  <section class="section" style="padding-top: 3rem; padding-bottom: 2rem;">
+    <div style="position: relative; border-radius: var(--radius-lg); overflow: hidden; height: 350px; border: 1px solid var(--border-glass); margin-bottom: 3rem;">
+      <img src="images/munnar_tour.jpg" alt="Motorcycle touring in Western Ghats Munnar India" style="width: 100%; height: 100%; object-fit: cover;">
+      <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(9,13,22,0.2) 0%, rgba(9,13,22,0.92) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 2.5rem;">
+        <span style="color: var(--primary-saffron); font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.05em;">Our Story & Mission</span>
+        <h1 style="font-size: 2.8rem; font-weight: 800; margin-top: 0.3rem;">The Spirit of Indian Motorcycle Touring</h1>
+      </div>
+    </div>
+
+    <!-- MISSION STATEMENT -->
+    <div style="max-width: 900px; margin: 0 auto 4rem; text-align: center;">
+      <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1.2rem;">
+        Born in the Ghats, Built for <span style="color: var(--primary-saffron);">All of Bharat</span>
+      </h2>
+      <p style="font-size: 1.05rem; color: var(--text-secondary); line-height: 1.8;">
+        In India, a motorcycle is never just a vehicle — it is an emotion. From the rhythmic thump of a Royal Enfield climbing Khardung La in Ladakh to a breeze-filled scooty ride down the coconut-lined lanes of North Goa, two wheels are the truest way to experience our motherland. Mithil Rental Servies was founded to democratize bike rentals across India with zero paperwork hassles, transparent INR pricing, and strict safety guidelines.
+      </p>
+    </div>
+
+    <!-- INDIAN PICKUP HUBS GRID -->
+    <div class="section-header" style="margin-bottom: 1.5rem;">
+      <div>
+        <h2 class="section-title">Authorized Yatri Rental Hubs</h2>
+        <p class="section-subtitle">Walk in with your Aadhaar / Driving License or book online for doorstep handover</p>
+      </div>
+    </div>
+
+    <div class="culture-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+      <div class="culture-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <span style="font-size: 2rem;">🏖️</span>
+          <span class="db-pill" style="background: rgba(16,185,129,0.1); color: var(--accent-green);">Open 7 AM - 11 PM</span>
+        </div>
+        <h3 style="font-size: 1.3rem;">Goa - Calangute Hub</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 0.8rem;">Near Tito's Lane Junction, Calangute, North Goa - 403516</p>
+        <p style="font-size: 0.88rem; color: var(--primary-saffron); font-weight: 600;">Specialty: Royal Enfield Bullets & Scooters for beach trails</p>
+      </div>
+
+      <div class="culture-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <span style="font-size: 2rem;">🏔️</span>
+          <span class="db-pill" style="background: rgba(16,185,129,0.1); color: var(--accent-green);">Open 6 AM - 9 PM</span>
+        </div>
+        <h3 style="font-size: 1.3rem;">Manali - Mall Road Hub</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 0.8rem;">Opposite Himachal Tourism Bus Stand, Old Manali Road - 175131</p>
+        <p style="font-size: 0.88rem; color: var(--primary-saffron); font-weight: 600;">Specialty: Himalayan 450 with panniers & high altitude gear</p>
+      </div>
+
+      <div class="culture-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <span style="font-size: 2rem;">⚡</span>
+          <span class="db-pill" style="background: rgba(16,185,129,0.1); color: var(--accent-green);">24x7 Pickup Locker</span>
+        </div>
+        <h3 style="font-size: 1.3rem;">Bengaluru - Koramangala Hub</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 0.8rem;">80 Feet Road, 4th Block, Koramangala, Bengaluru - 560034</p>
+        <p style="font-size: 0.88rem; color: var(--primary-saffron); font-weight: 600;">Specialty: Ather 450X EVs & Honda Activas for tech commuters</p>
+      </div>
+
+      <div class="culture-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <span style="font-size: 2rem;">🌊</span>
+          <span class="db-pill" style="background: rgba(16,185,129,0.1); color: var(--accent-green);">Open 8 AM - 10 PM</span>
+        </div>
+        <h3 style="font-size: 1.3rem;">Mumbai - Bandra West Hub</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 0.8rem;">Near Carter Road Promenade, Bandra West, Mumbai - 400050</p>
+        <p style="font-size: 0.88rem; color: var(--primary-saffron); font-weight: 600;">Specialty: Bajaj Pulsar NS200 & KTMs for Sea Link cruising</p>
+      </div>
+
+      <div class="culture-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <span style="font-size: 2rem;">🏛️</span>
+          <span class="db-pill" style="background: rgba(16,185,129,0.1); color: var(--accent-green);">Open 8 AM - 9 PM</span>
+        </div>
+        <h3 style="font-size: 1.3rem;">Delhi - Connaught Place Hub</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 0.8rem;">Outer Circle, Block E, Connaught Place, New Delhi - 110001</p>
+        <p style="font-size: 0.88rem; color: var(--primary-saffron); font-weight: 600;">Specialty: Cruiser & Sport bikes for Agra / Jaipur highway trips</p>
+      </div>
+
+      <div class="culture-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <span style="font-size: 2rem;">🏰</span>
+          <span class="db-pill" style="background: rgba(16,185,129,0.1); color: var(--accent-green);">Open 8 AM - 9 PM</span>
+        </div>
+        <h3 style="font-size: 1.3rem;">Jaipur - MI Road Hub</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 0.8rem;">Near Panch Batti, Mirza Ismail Road, Jaipur, Rajasthan - 302001</p>
+        <p style="font-size: 0.88rem; color: var(--primary-saffron); font-weight: 600;">Specialty: TVS Jupiter & Classics for Pink City fort trails</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDIAN RENTAL POLICIES -->
+  <section class="section" style="padding-top: 1rem;">
+    <div style="background: var(--card-dark); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 2.5rem;">
+      <h2 style="font-size: 1.6rem; font-weight: 700; margin-bottom: 1.5rem;">Rental Rules & Requirements (Govt of India Compliance)</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
+        <div>
+          <h4 style="color: var(--primary-saffron); margin-bottom: 0.5rem;">1. Driving License & Age</h4>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">Riders must be at least 18 years old and hold a valid Indian Driving License (or International Driving Permit for foreign nationals).</p>
+        </div>
+        <div>
+          <h4 style="color: var(--primary-saffron); margin-bottom: 0.5rem;">2. Mandatory Helmet Law</h4>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">As per Section 129 of the Motor Vehicles Act, helmets are mandatory for both rider and pillion. We provide 2 ISI-approved helmets free of charge.</p>
+        </div>
+        <div>
+          <h4 style="color: var(--primary-saffron); margin-bottom: 0.5rem;">3. Fuel Policy</h4>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">All bikes are handed over with sufficient petrol to reach the nearest fuel station. Electric EVs are provided with at least 80% charge.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-about">
+        <div class="logo-group">
+          <div class="logo-icon">🏍️</div>
+          <div class="logo-text">
+            <span class="logo-title">Mithil Rental Servies</span>
+            <span class="logo-sub">यात्री व्हील्स</span>
+          </div>
+        </div>
+        <p>Bharat's premier bike rental system running on Node.js and MySQL.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="bikes.html">Fleet Management</a></li>
+          <li><a href="bookings.html">Rental Bookings</a></li>
+          <li><a href="about.html">About & Hubs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Indian Hubs</h4>
+        <ul>
+          <li>Goa Calangute</li>
+          <li>Manali Mall Road</li>
+          <li>Bengaluru Koramangala</li>
+          <li>Mumbai Bandra</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>System Info</h4>
+        <ul>
+          <li>Express.js (Port 3000)</li>
+          <li>MySQL Workbench DB</li>
+          <li>DigiLocker KYC ready</li>
+          <li>Full CRUD APIs</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Mithil Rental Servies. Proudly Indian 🇮🇳</span>
+      <span>Live URL: <strong>http://localhost:3000</strong></span>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+</body>
+</html>

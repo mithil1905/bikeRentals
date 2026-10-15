@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rental Bookings & CRUD Dashboard | Mithil Rental Servies Bharat</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏍️</text></svg>">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo-group">
+        <div class="logo-icon">🏍️</div>
+        <div class="logo-text">
+          <span class="logo-title">Mithil Rental Servies</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="bikes.html" class="nav-link">Our Fleet (CRUD)</a></li>
+        <li><a href="bookings.html" class="nav-link active">My Bookings</a></li>
+        <li><a href="about.html" class="nav-link">About & Hubs</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div id="db-status-pill" class="db-pill">
+          <span class="dot"></span> Connecting...
+        </div>
+        <a href="#booking-form-section" class="btn btn-primary btn-sm">Book a Bike</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- BOOKING HERO WITH IMAGE -->
+  <section class="section" style="padding-top: 3rem; padding-bottom: 2rem;">
+    <div class="hero-grid" style="align-items: stretch; margin-bottom: 2.5rem;">
+      <div style="background: var(--card-dark); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 2.5rem; display: flex; flex-direction: column; justify-content: center;">
+        <div class="hero-tag">🇮🇳 Quick DigiLocker / Aadhaar Rental</div>
+        <h1 style="font-size: 2.4rem; font-weight: 800; line-height: 1.2; margin-bottom: 1rem;">
+          Instant Two-Wheeler Booking
+        </h1>
+        <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.98rem;">
+          Rent your dream motorcycle in seconds. Just provide your Indian mobile number, Aadhaar or Driving License ID, pick your ride, and hit the open highway!
+        </p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; color: var(--primary-saffron);">
+            <span>🛡️</span> Zero Cash Deposit
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; color: var(--primary-saffron);">
+            <span>🪖</span> 2 ISI Helmets
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; color: var(--primary-saffron);">
+            <span>⚡</span> Instant Confirmation
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-image-wrap" style="height: 320px;">
+        <img src="images/rider_booking.jpg" alt="Indian Rider with Royal Enfield Himalayan" style="width: 100%; height: 100%; object-fit: cover;">
+        <div class="hero-badge">
+          <span class="hero-badge-icon">📍</span>
+          <div class="hero-badge-text">
+            <h4>Live Hub Pickup</h4>
+            <p>Goa • Bengaluru • Manali • Mumbai • Delhi</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOKING FORM (CRUD: CREATE) -->
+    <div id="booking-form-section" style="background: var(--card-dark); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 3.5rem; box-shadow: var(--shadow-card);">
+      <div style="border-bottom: 1px solid var(--border-glass); padding-bottom: 1rem; margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.5rem; font-weight: 700;">Reserve Your Bike</h2>
+        <p style="color: var(--text-secondary); font-size: 0.9rem;">Fill out the reservation details. Your booking will be saved instantly to the MySQL database.</p>
+      </div>
+
+      <form id="new-booking-form">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin-bottom: 1.5rem;">
+          <div class="form-group">
+            <label class="form-label">Full Name *</label>
+            <input type="text" id="cust-name" class="form-control" placeholder="e.g. Rahul Sharma" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Mobile Number (India) *</label>
+            <input type="tel" id="cust-phone" class="form-control" placeholder="10-digit number e.g. 9876543210" pattern="[0-9]{10}" maxlength="10" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Aadhaar (12 digits) or DL No. *</label>
+            <input type="text" id="cust-aadhaar" class="form-control" placeholder="e.g. 4589 1234 5678 or DL-04..." required>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin-bottom: 1.5rem;">
+          <div class="form-group">
+            <label class="form-label">Select Bike *</label>
+            <select id="cust-bike-select" class="form-control" required>
+              <option value="">Loading available fleet...</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Pickup Hub *</label>
+            <select id="cust-hub" class="form-control" required>
+              <option value="Goa - Calangute Hub">Goa - Calangute Hub</option>
+              <option value="Bengaluru - Koramangala Hub">Bengaluru - Koramangala Hub</option>
+              <option value="Manali - Mall Road Hub">Manali - Mall Road Hub</option>
+              <option value="Mumbai - Bandra Hub">Mumbai - Bandra Hub</option>
+              <option value="Delhi - Connaught Place Hub">Delhi - Connaught Place Hub</option>
+              <option value="Jaipur - MI Road Hub">Jaipur - MI Road Hub</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Start Date *</label>
+            <input type="date" id="cust-start-date" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Duration (Days) *</label>
+            <input type="number" id="cust-days" class="form-control" min="1" max="30" value="1" required>
+          </div>
+        </div>
+
+        <!-- LIVE PRICING BREAKDOWN (IN RUPEES ₹) -->
+        <div style="background: rgba(9, 13, 22, 0.6); border: 1px solid var(--border-glass); border-radius: var(--radius-md); padding: 1.2rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <div style="font-size: 0.85rem; color: var(--text-secondary);">ESTIMATED FARE (INCLUDING 18% GST & FESTIVAL DISCOUNT)</div>
+            <div style="font-size: 0.88rem; color: var(--text-muted); margin-top: 0.2rem;">
+              Base: <span id="calc-base">₹0</span> • GST (18%): <span id="calc-gst">₹0</span> • Festive Discount: <span style="color:var(--accent-green);">-₹100</span>
+            </div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase;">Total Payable</div>
+            <div style="font-size: 1.8rem; font-weight: 800; color: var(--primary-saffron);" id="calc-total">₹0</div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="btn-submit-booking" style="width: 100%; height: 50px; font-size: 1.05rem;">
+          Confirm Booking & Save to Database
+        </button>
+      </form>
+    </div>
+
+    <!-- LIVE RENTALS TABLE (CRUD: READ, UPDATE, DELETE) -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <h2 class="section-title" style="font-size: 1.8rem; margin-bottom: 0.2rem;">Active & Past Bookings</h2>
+        <p class="section-subtitle">Manage customer bookings, update return status, or cancel rentals (Full CRUD)</p>
+      </div>
+      <button class="btn btn-secondary btn-sm" onclick="loadRentals()">🔄 Refresh Bookings</button>
+    </div>
+
+    <div class="table-responsive">
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Booking ID</th>
+            <th>Customer Details</th>
+            <th>Bike & Hub</th>
+            <th>Dates & Duration</th>
+            <th>Total Amount</th>
+            <th>Status</th>
+            <th style="text-align: right;">CRUD Actions</th>
+          </tr>
+        </thead>
+        <tbody id="rentals-table-body">
+          <tr>
+            <td colspan="7" style="text-align: center; padding: 2.5rem; color: var(--text-secondary);">
+              Loading bookings from MySQL...
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- MODAL: EDIT BOOKING (CRUD UPDATE) -->
+  <div class="modal-overlay" id="edit-booking-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Update Booking Record</h3>
+        <button class="modal-close" id="btn-close-edit-modal">&times;</button>
+      </div>
+      <form id="edit-booking-form">
+        <input type="hidden" id="edit-booking-id">
+
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label">Customer Name</label>
+          <input type="text" id="edit-cust-name" class="form-control" readonly style="opacity: 0.7;">
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+          <div class="form-group">
+            <label class="form-label">Duration (Days)</label>
+            <input type="number" id="edit-days" class="form-control" min="1" max="30" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Status *</label>
+            <select id="edit-status" class="form-control" required>
+              <option value="Active">Active (Riding)</option>
+              <option value="Completed">Completed (Returned)</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label class="form-label">Total Amount (₹)</label>
+          <input type="number" id="edit-amount" class="form-control" step="1" required>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+          <button type="button" class="btn btn-secondary" id="btn-cancel-edit-modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-about">
+        <div class="logo-group">
+          <div class="logo-icon">🏍️</div>
+          <div class="logo-text">
+            <span class="logo-title">Mithil Rental Servies</span>
+            <span class="logo-sub">यात्री व्हील्स</span>
+          </div>
+        </div>
+        <p>Bharat's trusted two-wheeler rental platform with real-time MySQL database integration and CRUD operations.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="bikes.html">Fleet Management</a></li>
+          <li><a href="bookings.html">Rental Bookings</a></li>
+          <li><a href="about.html">Indian Hubs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Hubs</h4>
+        <ul>
+          <li>Goa (Calangute / Anjuna)</li>
+          <li>Manali (Mall Road)</li>
+          <li>Bengaluru (Koramangala)</li>
+          <li>Mumbai (Bandra West)</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>CRUD API Operations</h4>
+        <ul>
+          <li>POST /api/rentals (Create)</li>
+          <li>GET /api/rentals (Read)</li>
+          <li>PUT /api/rentals/:id (Update)</li>
+          <li>DELETE /api/rentals/:id (Delete)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Mithil Rental Servies. Built with Node.js & MySQL 🇮🇳</span>
+      <span>Port: <strong>http://localhost:3000</strong></span>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/bookings.js"></script>
+</body>
+</html>
